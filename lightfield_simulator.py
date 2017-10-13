@@ -42,8 +42,8 @@ from math import *
 from mathutils import *
 
 __bpydoc__ = """
-Write me!
-"""
+this line is added by zhengyu to test if the code revert to the original version"""
+
 
 
 class OBJECT_OT_show_frustum(bpy.types.Operator):
@@ -534,13 +534,13 @@ class OBJECT_OT_render_lightfield(bpy.types.Operator):
         max_res = max(LF.x_res, LF.y_res)
         factor = LF.baseline_x_m * LF.focal_length * LF.focus_dist * max_res
 
-        # prepare depth output node
-        right = bpy.data.scenes[scene_key].node_tree.nodes['Render Layers'].outputs['Z']
+        # prepare depth output node 
+        right = bpy.data.scenes[scene_key].node_tree.nodes['Render Layers'].outputs['Depth']
         depth_view_node = bpy.data.scenes[scene_key].node_tree.nodes.new('CompositorNodeViewer')
-        depth_view_node.use_alpha = False
+        depth_view_node.use_alpha = False   
         left = depth_view_node.inputs[0]
-        bpy.data.scenes[scene_key].node_tree.links.new(right, left)
-
+        bpy.data.scenes[scene_key].node_tree.links.new(right, left)  
+        """seems to output result from Z and link into depth_view node"""
         for camera in cameras:
             print("Rendering depth map with camera: " + camera.name)
 
